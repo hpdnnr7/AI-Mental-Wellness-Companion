@@ -1,0 +1,77 @@
+{
+  "sessions": [
+    {
+      "timestamp": "2025-11-13T21:36:30.905159",
+      "moods": [
+        "neutral"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:38:01.121007",
+      "moods": [
+        "neutral"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:38:01.121007",
+      "moods": [
+        "neutral"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:38:36.245367",
+      "moods": [
+        "neutral",
+        "positive",
+        "positive"
+      ],
+      "message_count": 3
+    },
+    {
+      "timestamp": "2025-11-13T21:39:54.040786",
+      "moods": [
+        "positive"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:40:44.456104",
+      "moods": [
+        "neutral"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:41:02.961648",
+      "moods": [
+        "neutral"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:42:45.537640",
+      "moods": [
+        "neutral"
+      ],
+      "message_count": 1
+    },
+    {
+      "timestamp": "2025-11-13T21:49:13.631094",
+      "moods": [
+        "neutral",
+        "positive",
+        "neutral",
+        "neutral",
+        "negative",
+        "negative",
+        "negative",
+        "negative"
+      ],
+      "message_count": 8
+    }
+  ],
+  "total_messages": 18
+}
