@@ -4,7 +4,20 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "gobject-introspection", "gtk3", "pkg-config", "qhull", "tcl", "tk", "killall"]
 
 [[ports]]
 localPort = 8501
 externalPort = 80
+
+[[ports]]
+localPort = 8502
+externalPort = 3000
+
+[[ports]]
+localPort = 8503
+externalPort = 3001
+
+[[ports]]
+localPort = 8504
+externalPort = 3002
