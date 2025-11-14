@@ -92,7 +92,7 @@ The app is deployed on Streamlit Cloud:
 
 ## Saved Sessions
 
-All sessions are saved in mood_history.txt in the following format:
+All sessions are saved locally and can be downloaded in a textfile. The data is displayed in the following format:
 <pre>
 Session - 2025-11-14T10:48:00
 Messages: 10
