@@ -409,9 +409,9 @@ with col2:
             current_session_txt += f"Current Session Mood: {dominant_mood.title()}\n"
             current_session_txt += "=" * 60 + "\n"
 
-            # Provide download button
-            st.download_button(
-                "⬇️ Download Current Session", 
-                current_session_txt, 
-                file_name=f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
-            )
+# Provide download button
+    st.download_button(
+    "⬇️ Download Current Session", 
+    current_session_txt, 
+    file_name=f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+    )
