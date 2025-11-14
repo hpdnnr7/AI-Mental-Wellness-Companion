@@ -8,7 +8,9 @@ import os
 st.set_page_config(page_title="Mood-Aware Chatbot 💬", page_icon="💖")
 
 st.title("Mood-Aware Chatbot 💬")
-st.write("I'm here to listen and offer gentle support. Tell me how you're feeling today.")
+st.write(
+    "I'm here to listen and offer gentle support. Tell me how you're feeling today."
+)
 
 # File path for persistent storage
 MOOD_DATA_FILE = "mood_history.txt"
@@ -35,8 +37,8 @@ def save_session_to_txt(session_data):
             mood_counts[mood] += 1
 
         f.write(f"Summary: {mood_counts['positive']} positive, "
-               f"{mood_counts['neutral']} neutral, "
-               f"{mood_counts['negative']} negative\n")
+                f"{mood_counts['neutral']} neutral, "
+                f"{mood_counts['negative']} negative\n")
         f.write("-" * 60 + "\n\n")
 
 
@@ -104,7 +106,9 @@ def analyze_sentiment_structure(text):
 def get_mood(text):
     """Improved mood detection with word boundary checking"""
     text_lower = text.lower()
-    words = set(text_lower.replace(',', ' ').replace('.', ' ').replace('!', ' ').split())
+    words = set(
+        text_lower.replace(',', ' ').replace('.', ' ').replace('!',
+                                                               ' ').split())
 
     negative_cues = {
         "sad", "sadness", "tired", "tiredness", "stressed", "stressful",
@@ -123,11 +127,12 @@ def get_mood(text):
         "accomplished", "thrilled", "delighted", "well", "relieved", "relief",
         "calm", "peaceful", "peace", "relaxed", "relaxing", "relaxation",
         "relax", "chill", "chilled", "chilling", "chillax", "motivated",
-        "inspired", "optimistic", "hopeful", "confident", "cheerful", "energized"
+        "inspired", "optimistic", "hopeful", "confident", "cheerful",
+        "energized"
     }
     neutral_cues = {
-        "okay", "fine", "alright", "so-so", "good", "decent", "ok",
-        "neutral", "indifferent", "meh", "unsure", "bored", "numb"
+        "okay", "fine", "alright", "so-so", "good", "decent", "ok", "neutral",
+        "indifferent", "meh", "unsure", "bored", "numb"
     }
 
     found_negative = bool(negative_cues & words)
@@ -152,10 +157,8 @@ def get_mood(text):
 
 def should_include_secondary(primary_topic, secondary_topic, mood):
     """Determines if secondary topic should be included to avoid awkward repetition"""
-    redundant_pairs = [
-        ("work", "general"), ("school", "general"),
-        ("relationship", "general"), ("travel", "general")
-    ]
+    redundant_pairs = [("work", "general"), ("school", "general"),
+                       ("relationship", "general"), ("travel", "general")]
 
     if (primary_topic, secondary_topic) in redundant_pairs:
         return False
@@ -165,18 +168,31 @@ def should_include_secondary(primary_topic, secondary_topic, mood):
 def detect_topic(text):
     text = text.lower()
     topics = {
-        "travel": ["travel", "trip", "vacation", "flight", "journey", "airport", "brazil", "europe", "asia"],
-        "relationship": ["love", "boyfriend", "girlfriend", "relationship", "partner", "dating", "crush"],
-        "school": ["school", "class", "study", "homework", "exam", "college", "professor", "assignment"],
+        "travel": [
+            "travel", "trip", "vacation", "flight", "journey", "airport",
+            "brazil", "europe", "asia"
+        ],
+        "relationship": [
+            "love", "boyfriend", "girlfriend", "relationship", "partner",
+            "dating", "crush"
+        ],
+        "school": [
+            "school", "class", "study", "homework", "exam", "college",
+            "professor", "assignment"
+        ],
         "work": ["work", "job", "boss", "career", "office", "meeting"],
     }
 
-    detected = [t for t, kws in topics.items() if any(word in text for word in kws)]
+    detected = [
+        t for t, kws in topics.items() if any(word in text for word in kws)
+    ]
     if not detected:
         detected = ["general"]
 
     priority_order = ["travel", "relationship", "school", "work", "general"]
-    detected_sorted = sorted(detected, key=lambda x: priority_order.index(x) if x in priority_order else len(priority_order))
+    detected_sorted = sorted(detected,
+                             key=lambda x: priority_order.index(x)
+                             if x in priority_order else len(priority_order))
 
     return detected_sorted[:2]
 
@@ -192,44 +208,58 @@ def get_response(mood, user_message):
         ])
     elif intent == "thanks":
         return random.choice([
-            "Aww, you're welcome 💖",
-            "Happy to help anytime 🌸",
+            "Aww, you're welcome 💖", "Happy to help anytime 🌸",
             "You're sweet — I'm here for you always 💕"
         ])
     elif intent == "farewell":
         return random.choice([
-            "Take care, okay? 🌿",
-            "Talk soon — sending good vibes your way 💫",
+            "Take care, okay? 🌿", "Talk soon — sending good vibes your way 💫",
             "Bye for now! 💌"
         ])
 
-    has_contrast, before_topics, before_mood, after_topics, after_mood = analyze_sentiment_structure(user_message)
+    has_contrast, before_topics, before_mood, after_topics, after_mood = analyze_sentiment_structure(
+        user_message)
 
     topic_responses = {
         "travel": {
-            "positive": "That sounds so exciting! ✈️ Traveling can be such a great way to reset and find joy.",
-            "neutral": "Travel plans always bring mixed feelings — are you feeling ready for it?",
-            "negative": "Travel can be stressful with all the planning 💛 But it'll be worth it once you're there!"
+            "positive":
+            "That sounds so exciting! ✈️ Traveling can be such a great way to reset and find joy.",
+            "neutral":
+            "Travel plans always bring mixed feelings — are you feeling ready for it?",
+            "negative":
+            "Travel can be stressful with all the planning 💛 But it'll be worth it once you're there!"
         },
         "work": {
-            "positive": "That's awesome about work! 💼 Keep that momentum going!",
-            "neutral": "Work can be tricky to balance — are you feeling productive or a bit drained?",
-            "negative": "Work stress is real 😞 Remember to give yourself credit for showing up and doing your best."
+            "positive":
+            "That's awesome about work! 💼 Keep that momentum going!",
+            "neutral":
+            "Work can be tricky to balance — are you feeling productive or a bit drained?",
+            "negative":
+            "Work stress is real 😞 Remember to give yourself credit for showing up and doing your best."
         },
         "relationship": {
-            "positive": "Love and connection can feel so beautiful 💖 I'm happy for you!",
-            "neutral": "Relationships can be complex — how are things between you two lately?",
-            "negative": "Matters of the heart can really weigh on you 💔 I'm here if you want to unpack it."
+            "positive":
+            "Love and connection can feel so beautiful 💖 I'm happy for you!",
+            "neutral":
+            "Relationships can be complex — how are things between you two lately?",
+            "negative":
+            "Matters of the heart can really weigh on you 💔 I'm here if you want to unpack it."
         },
         "school": {
-            "positive": "Nice! 📚 Sounds like things are going well with school!",
-            "neutral": "School can be a lot to juggle — are you managing okay?",
-            "negative": "That sounds exhausting 💛 Try not to be too hard on yourself — learning takes time."
+            "positive":
+            "Nice! 📚 Sounds like things are going well with school!",
+            "neutral":
+            "School can be a lot to juggle — are you managing okay?",
+            "negative":
+            "That sounds exhausting 💛 Try not to be too hard on yourself — learning takes time."
         },
         "general": {
-            "positive": "I love hearing good news like that 🌞 What's been lifting your mood?",
-            "neutral": "Thanks for sharing — how's your day feeling overall?",
-            "negative": "That sounds rough 💛 Take a deep breath — you're doing your best."
+            "positive":
+            "I love hearing good news like that 🌞 What's been lifting your mood?",
+            "neutral":
+            "Thanks for sharing — how's your day feeling overall?",
+            "negative":
+            "That sounds rough 💛 Take a deep breath — you're doing your best."
         }
     }
 
@@ -251,7 +281,8 @@ def get_response(mood, user_message):
             secondary_response = topic_responses[secondary_topic][mood]
             connectors = ["Also, ", "And ", "Plus, ", "On another note, "]
             connector = random.choice(connectors)
-            secondary_response = secondary_response[0].lower() + secondary_response[1:]
+            secondary_response = secondary_response[0].lower(
+            ) + secondary_response[1:]
             return f"{primary_response} {connector}{secondary_response}"
 
     return primary_response
@@ -271,7 +302,8 @@ if "session_start" not in st.session_state:
     st.session_state.session_start = datetime.now().isoformat()
 
 # Create text input
-st.session_state.user_input = st.text_input("You:", key="input_box", placeholder="Type your message here...")
+st.session_state.user_input = st.text_input(
+    "You:", key="input_box", placeholder="Type your message here...")
 
 # Handle Send button
 if st.button("Send"):
@@ -279,7 +311,8 @@ if st.button("Send"):
         mood = get_mood(st.session_state.user_input)
         bot_response = get_response(mood, st.session_state.user_input)
 
-        has_contrast, before_topics, before_mood, after_topics, after_mood = analyze_sentiment_structure(st.session_state.user_input)
+        has_contrast, before_topics, before_mood, after_topics, after_mood = analyze_sentiment_structure(
+            st.session_state.user_input)
 
         if has_contrast and before_mood and after_mood and before_mood != after_mood:
             graph_mood = "neutral"
@@ -320,14 +353,21 @@ if "moods" in st.session_state and len(st.session_state.moods) > 0:
 
         dominant_mood = max(mood_counts, key=mood_counts.get)
         mood_emoji = {"positive": "😊", "neutral": "😐", "negative": "😔"}
-        st.metric("Current Session Mood", f"{dominant_mood.title()} {mood_emoji[dominant_mood]}")
+        st.metric("Current Session Mood",
+                  f"{dominant_mood.title()} {mood_emoji[dominant_mood]}")
 
     # Plot current session
     mood_map = {"negative": -1, "neutral": 0, "positive": 1}
     mood_values = [mood_map[m] for m in st.session_state.moods]
 
     fig, ax = plt.subplots(figsize=(10, 4))
-    ax.plot(range(1, len(mood_values) + 1), mood_values, marker="o", linestyle="-", linewidth=2, markersize=8)
+    ax.plot(range(1,
+                  len(mood_values) + 1),
+            mood_values,
+            marker="o",
+            linestyle="-",
+            linewidth=2,
+            markersize=8)
     ax.set_xlabel("Message #")
     ax.set_ylabel("Mood Level")
     ax.set_title("Your Mood Pattern (Current Session)")
@@ -368,3 +408,7 @@ with col2:
             }
             save_session_to_txt(session_data)
             st.success("✅ Session saved to mood_history.txt!")
+            # Add download button
+            with open("mood_history.txt", "r") as f:
+                data = f.read()
+            st.download_button("⬇️ Download Mood History", data, file_name="mood_history.txt")
