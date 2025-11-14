@@ -80,9 +80,9 @@ Note: This app does not store user data permanently. All session data is local u
 
 ## Screenshots
 
-Chat interface with AI responses
+Chat interface with AI responses along with mood trend visualizations for the current session
 <img src='mood_bot.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-Mood trend visualization for the current session
+
 
 ## Deployment
 
