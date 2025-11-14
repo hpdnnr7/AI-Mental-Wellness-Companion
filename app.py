@@ -407,7 +407,7 @@ with col2:
         current_session_txt += f"Session - {st.session_state.session_start}\n"
         current_session_txt += f"Messages: {len(st.session_state.history)//2}\n"
         current_session_txt += f"Moods: {', '.join(st.session_state.moods)}\n"
-        current_session_txt += f"Current Session Mood: {dominant_mood.title()}\n"
+        current_session_txt += f"Overall Session Mood: {dominant_mood.title()}\n"
         current_session_txt += "=" * 60 + "\n"
 
     # Always render the button
