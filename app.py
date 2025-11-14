@@ -300,10 +300,13 @@ if "moods" not in st.session_state:
 
 if "session_start" not in st.session_state:
     st.session_state.session_start = datetime.now().isoformat()
-
+if "reset_counter" not in st.session_state:
+    st.session_state.reset_counter = 0
 # Create text input
 st.session_state.user_input = st.text_input(
-    "You:", key="input_box", placeholder="Type your message here...")
+    "You:", key=f"input_box_{st.session_state.reset_counter}",  # Dynamic key
+
+    
 
 # Handle Send button
 if st.button("Send"):
@@ -382,15 +385,13 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("🔄 Reset Chat"):
-        # Reset session state except for session_start
+        # Reset session state
         for key in ["history", "moods", "user_input"]:
             if key in st.session_state:
                 del st.session_state[key]
 
         st.session_state.session_start = datetime.now().isoformat()
-
-        # Add a reset message to show in chat
-        st.session_state.history = [("AI", "🆕 Chat Reset — start a new session!")]
+        st.session_state.reset_counter += 1  # Increment counter to change key
 
         st.rerun()
 with col2:
