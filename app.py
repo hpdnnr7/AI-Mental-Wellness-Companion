@@ -390,28 +390,28 @@ with col1:
         st.rerun()
 
 with col2:
-    # Generate current session text
-    if "moods" in st.session_state and st.session_state.moods:
-        current_session_txt = "=" * 60 + "\n"
-        current_session_txt += "CURRENT SESSION\n"
-        current_session_txt += "=" * 60 + "\n\n"
-        current_session_txt += f"Session - {st.session_state.session_start}\n"
-        current_session_txt += f"Messages: {len(st.session_state.history)//2}\n"
-        current_session_txt += f"Moods: {', '.join(st.session_state.moods)}\n"
-        current_session_txt += f"Average Mood: {', '.join(st.session_state.dominant_mood)}\n"
+    if st.button("⬇️ Download Current Session"):
+        if st.session_state.moods:
+            # Count moods to determine dominant/current session mood
+            mood_counts = {"positive": 0, "neutral": 0, "negative": 0}
+            for mood in st.session_state.moods:
+                mood_counts[mood] += 1
 
-        mood_counts = {"positive": 0, "neutral": 0, "negative": 0}
-        for mood in st.session_state.moods:
-            mood_counts[mood] += 1
+            dominant_mood = max(mood_counts, key=mood_counts.get)
 
-        current_session_txt += f"Summary: {mood_counts['positive']} positive, "
-        current_session_txt += f"{mood_counts['neutral']} neutral, "
-        current_session_txt += f"{mood_counts['negative']} negative\n"
-        current_session_txt += "=" * 60 + "\n"
+            # Create current session string for download
+            current_session_txt = "=" * 60 + "\n"
+            current_session_txt += "CURRENT SESSION\n"
+            current_session_txt += "=" * 60 + "\n\n"
+            current_session_txt += f"Session - {st.session_state.session_start}\n"
+            current_session_txt += f"Messages: {len(st.session_state.history)//2}\n"
+            current_session_txt += f"Moods: {', '.join(st.session_state.moods)}\n"
+            current_session_txt += f"Current Session Mood: {dominant_mood.title()}\n"
+            current_session_txt += "=" * 60 + "\n"
 
-        # Render download button **outside any st.button check**
-        st.download_button(
-            "⬇️ Download Current Session", 
-            current_session_txt, 
-            file_name=f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
-        )
+            # Provide download button
+            st.download_button(
+                "⬇️ Download Current Session", 
+                current_session_txt, 
+                file_name=f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+            )
