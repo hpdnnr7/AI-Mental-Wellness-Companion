@@ -21,15 +21,15 @@ Built with Streamlit, TextBlob, and Matplotlib for real-time mood visualization 
 
 Clone the repository:
 
-git clone https://github.com/hpdnnr7/AI-Mental-Wellness-Companion.git
-cd AI-Mental-Wellness-Companion
+<pre>git clone https://github.com/hpdnnr7/AI-Mental-Wellness-Companion.git
+cd AI-Mental-Wellness-Companion</pre>
 
 
 Create a virtual environment (optional but recommended):
 
-python -m venv venv
+<pre>python -m venv venv
 source venv/bin/activate  # macOS/Linux
-venv\Scripts\activate     # Windows
+venv\Scripts\activate     # Windows</pre>
 
 
 Install dependencies:
@@ -39,7 +39,7 @@ Install dependencies:
 
 Run the app locally:
 
-streamlit run app.py
+<pre>streamlit run app.py</pre>
 
 
 If running on a restricted network (like a company network), the local app may not display due to firewall/proxy restrictions. In that case, you can test via the deployed Streamlit Cloud app.
