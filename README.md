@@ -73,9 +73,10 @@ Any updates pushed to GitHub will automatically reflect on the deployed app.
 ## Saved Sessions
 
 All sessions are saved in mood_history.txt in the following format:
-
+<pre>
 Session - 2025-11-14T10:48:00
 Messages: 10
 Moods: positive, negative, neutral, ...
 Summary: 4 positive, 3 neutral, 3 negative
 ------------------------------------------------------------
+</pre>
