@@ -5,15 +5,40 @@ Built with Streamlit, TextBlob, and Matplotlib for real-time mood visualization 
 
 ## Features
 
-* Conversational AI: Chat naturally with the bot, which responds based on mood and intent.
+* Conversational AI
+  * Chat naturally with the bot, which responds based on mood and intent.
 
-* Mood Analysis: Detects positive, neutral, or negative moods, including nuanced contrast statements.
+* Mood Detection
+  * Tracks whether your messages are positive, neutral, or negative.
 
-* Mood Visualization: Tracks your mood throughout the session and shows trends in a graph.
+* Mood Analytics
 
-* Session Tracking: Save conversations and mood stats to mood_history.txt.
+  * Visualizes your mood trends over the current session. Shows the users:
 
-* Positive Streaks: Highlights your current positive streak messages for motivation.
+    * Current positive streak
+
+    * Dominant mood for the session
+      * Note: The Current Session Mood displays the most frequently occurring mood throughout the conversation, providing an at-a-glance summary of the overall emotional tone.
+
+    * Mood trend chart
+
+* Mood Visualization
+  *  Tracks your mood throughout the session and shows trends in a graph.
+
+* Session Tracking
+  *  Save conversations and mood stats to mood_history.txt.
+
+* Positive Streaks
+  *  Highlights your current positive streak messages for motivation.
+
+* Download Current Session
+  *Download a .txt file summarizing your current session, including:
+
+    * Number of messages
+  
+    * Mood of each message
+  
+    * Dominant mood for the session
 
 * Reset & Save: Easily reset the chat or save the session at any time.
 
@@ -41,26 +66,22 @@ Run the app locally:
 
 <pre>streamlit run app.py</pre>
 
-
-If running on a restricted network (like a company network), the local app may not display due to firewall/proxy restrictions. In that case, you can test via the deployed Streamlit Cloud app.
-
 ## Usage
 
-Type your message in the input box and press Send.
+1. Type your message in the input box and press Send.
 
-The bot will respond with empathetic messages based on your mood.
+2. View AI responses and mood analytics on the page.
 
-Reset Chat clears the session (but saves it automatically if messages exist).
+3. Click 🔄 Reset Chat to clear the chat while keeping session data internally.
 
-Save Session writes the current conversation and mood stats to mood_history.txt.
+4. Click ⬇️ Download Current Session to save your current session to a text file.
 
-Mood trends and streaks are displayed in an interactive graph for easy tracking.
+Note: This app does not store user data permanently. All session data is local unless you download it manually.
 
 ## Screenshots
 
 Chat interface with AI responses
-
-
+<img src='mood_bot.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 Mood trend visualization for the current session
 
 ## Deployment
@@ -68,7 +89,6 @@ Mood trend visualization for the current session
 The app is deployed on Streamlit Cloud:
 [Live App Link](https://ai-mental-wellness-companion-uhf6kft7ebd4n3awrn7s3u.streamlit.app/)
 
-Any updates pushed to GitHub will automatically reflect on the deployed app.
 
 ## Saved Sessions
 
