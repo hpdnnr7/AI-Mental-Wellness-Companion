@@ -382,13 +382,17 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("🔄 Reset Chat"):
-        # Reset session (no automatic saving)
+        # Reset session state except for session_start
         for key in ["history", "moods", "user_input"]:
             if key in st.session_state:
                 del st.session_state[key]
-        st.session_state.session_start = datetime.now().isoformat()
-        st.rerun()
 
+        st.session_state.session_start = datetime.now().isoformat()
+
+        # Add a reset message to show in chat
+        st.session_state.history = [("AI", "🆕 Chat Reset — start a new session!")]
+
+        st.rerun()
 with col2:
     # Initialize variable so Pyright doesn't complain
     current_session_txt = ""
