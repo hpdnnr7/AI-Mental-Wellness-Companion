@@ -5,17 +5,17 @@ Built with Streamlit, TextBlob, and Matplotlib for real-time mood visualization 
 
 ## Features
 
-Conversational AI: Chat naturally with the bot, which responds based on mood and intent.
+* Conversational AI: Chat naturally with the bot, which responds based on mood and intent.
 
-Mood Analysis: Detects positive, neutral, or negative moods, including nuanced contrast statements.
+* Mood Analysis: Detects positive, neutral, or negative moods, including nuanced contrast statements.
 
-Mood Visualization: Tracks your mood throughout the session and shows trends in a graph.
+* Mood Visualization: Tracks your mood throughout the session and shows trends in a graph.
 
-Session Tracking: Save conversations and mood stats to mood_history.txt.
+* Session Tracking: Save conversations and mood stats to mood_history.txt.
 
-Positive Streaks: Highlights your current positive streak messages for motivation.
+* Positive Streaks: Highlights your current positive streak messages for motivation.
 
-Reset & Save: Easily reset the chat or save the session at any time.
+* Reset & Save: Easily reset the chat or save the session at any time.
 
 ## Installation
 
