@@ -304,8 +304,10 @@ if "reset_counter" not in st.session_state:
     st.session_state.reset_counter = 0
 # Create text input
 st.session_state.user_input = st.text_input(
-    "You:", key=f"input_box_{st.session_state.reset_counter}"),  # Dynamic key
-
+    "You:", 
+    key=f"input_box_{st.session_state.reset_counter}",
+    placeholder="Type your message here..."
+)
     
 
 # Handle Send button
