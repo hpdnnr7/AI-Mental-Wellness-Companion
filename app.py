@@ -382,45 +382,28 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("🔄 Reset Chat"):
-        # Save current session before resetting
-        if st.session_state.moods:
-            session_data = {
-                "timestamp": st.session_state.session_start,
-                "moods": st.session_state.moods,
-                "message_count": len(st.session_state.history) // 2
-            }
-            save_session_to_txt(session_data)
-
-        # Reset session
+        # Reset session (no automatic saving)
         for key in ["history", "moods", "user_input"]:
             if key in st.session_state:
                 del st.session_state[key]
         st.session_state.session_start = datetime.now().isoformat()
         st.rerun()
 
+
+
 with col2:
-    if st.button("💾 Save Session"):
+    if st.button("⬇️ Download Current Session"):
         if st.session_state.moods:
-            # Create current session data
-            session_data = {
-                "timestamp": st.session_state.session_start,
-                "moods": st.session_state.moods,
-                "message_count": len(st.session_state.history) // 2
-            }
-
-            # Save to the full history file
-            save_session_to_txt(session_data)
-
-            # Create a separate string for JUST this session (for download)
+            # Create current session string for download
             current_session_txt = "=" * 60 + "\n"
             current_session_txt += "CURRENT SESSION\n"
             current_session_txt += "=" * 60 + "\n\n"
-            current_session_txt += f"Session - {session_data['timestamp']}\n"
-            current_session_txt += f"Messages: {session_data['message_count']}\n"
-            current_session_txt += f"Moods: {', '.join(session_data['moods'])}\n"
+            current_session_txt += f"Session - {st.session_state.session_start}\n"
+            current_session_txt += f"Messages: {len(st.session_state.history)//2}\n"
+            current_session_txt += f"Moods: {', '.join(st.session_state.moods)}\n"
 
             mood_counts = {"positive": 0, "neutral": 0, "negative": 0}
-            for mood in session_data['moods']:
+            for mood in st.session_state.moods:
                 mood_counts[mood] += 1
 
             current_session_txt += f"Summary: {mood_counts['positive']} positive, "
@@ -428,9 +411,6 @@ with col2:
             current_session_txt += f"{mood_counts['negative']} negative\n"
             current_session_txt += "=" * 60 + "\n"
 
-            st.success("✅ Session saved!")
-
-            # Download button for CURRENT session only
             st.download_button(
                 "⬇️ Download Current Session", 
                 current_session_txt, 
