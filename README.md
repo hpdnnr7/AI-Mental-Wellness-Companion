@@ -66,7 +66,7 @@ Mood trend visualization for the current session
 ## Deployment
 
 The app is deployed on Streamlit Cloud:
-Live App Link
+[Live App Link](https://ai-mental-wellness-companion-uhf6kft7ebd4n3awrn7s3u.streamlit.app/)
 
 Any updates pushed to GitHub will automatically reflect on the deployed app.
 
