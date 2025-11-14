@@ -377,7 +377,7 @@ if "moods" in st.session_state and len(st.session_state.moods) > 0:
 
     st.pyplot(fig)
 
-# Reset and Save buttons
+# Reset and Download buttons
 col1, col2 = st.columns(2)
 
 with col1:
@@ -390,28 +390,29 @@ with col1:
         st.rerun()
 
 with col2:
-    if st.button("⬇️ Download Current Session"):
-        if st.session_state.moods:
-            # Count moods to determine dominant/current session mood
-            mood_counts = {"positive": 0, "neutral": 0, "negative": 0}
-            for mood in st.session_state.moods:
-                mood_counts[mood] += 1
+    # Initialize variable so Pyright doesn't complain
+    current_session_txt = ""
 
-            dominant_mood = max(mood_counts, key=mood_counts.get)
+    if st.session_state.moods:
+        # Count moods to determine dominant/current session mood
+        mood_counts = {"positive": 0, "neutral": 0, "negative": 0}
+        for mood in st.session_state.moods:
+            mood_counts[mood] += 1
+        dominant_mood = max(mood_counts, key=mood_counts.get)
 
-            # Create current session string for download
-            current_session_txt = "=" * 60 + "\n"
-            current_session_txt += "CURRENT SESSION\n"
-            current_session_txt += "=" * 60 + "\n\n"
-            current_session_txt += f"Session - {st.session_state.session_start}\n"
-            current_session_txt += f"Messages: {len(st.session_state.history)//2}\n"
-            current_session_txt += f"Moods: {', '.join(st.session_state.moods)}\n"
-            current_session_txt += f"Current Session Mood: {dominant_mood.title()}\n"
-            current_session_txt += "=" * 60 + "\n"
+        # Create current session string for download
+        current_session_txt = "=" * 60 + "\n"
+        current_session_txt += "CURRENT SESSION\n"
+        current_session_txt += "=" * 60 + "\n\n"
+        current_session_txt += f"Session - {st.session_state.session_start}\n"
+        current_session_txt += f"Messages: {len(st.session_state.history)//2}\n"
+        current_session_txt += f"Moods: {', '.join(st.session_state.moods)}\n"
+        current_session_txt += f"Current Session Mood: {dominant_mood.title()}\n"
+        current_session_txt += "=" * 60 + "\n"
 
-# Provide download button
+    # Always render the button
     st.download_button(
-    "⬇️ Download Current Session", 
-    current_session_txt, 
-    file_name=f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        "⬇️ Download Current Session",
+        current_session_txt,
+        file_name=f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
     )
